@@ -1,0 +1,27 @@
+export AJ_ROOT=$HOME/src
+export OS=linux
+export CPU=arm
+export LD_LIBRARY_PATH=$AJ_ROOT/alljoyn/build/$OS/$CPU/debug/dist/cpp/lib:$LD_LIBRARY_PATH
+
+sudo apt-get update
+sudo apt-get install git
+sudo apt-get install gedit
+sudo apt-get install build-essential 
+sudo apt-get install libgtk2.0-dev 
+sudo apt-get install libssl-dev xsltproc 
+sudo apt-get install libxml2-dev 
+sudo apt-get install libcap-dev 
+sudo apt-get install gcc 
+sudo apt-get install g++
+sudo apt-get install scons
+sudo apt-get install doxygen
+sudo apt-get install graphviz
+sudo ln -s /usr/bin/g++ /usr/bin/arm-angstrom-linux-gnueabi-g++
+sudo ln -s /usr/bin/gcc /usr/bin/arm-angstrom-linux-gnueabi-gcc
+
+mkdir -p $AJ_ROOT
+cd $AJ_ROOT
+git clone https://git.allseenalliance.org/gerrit/core/alljoyn
+cd alljoyn
+git checkout RB16.04
+scons OS=linux CPU=arm CROSS_COMPILE=/usr/bin/arm-linux-gnueabihf- BINDINGS=cpp WS=off DOCS=html
